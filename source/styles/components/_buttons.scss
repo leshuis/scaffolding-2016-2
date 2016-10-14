@@ -1,0 +1,113 @@
+/*doc
+---
+title: buttons
+name: buttons
+category: components
+---
+
+<button class="button">button</button>
+<button class="button focus">focus</button>
+<button class="button hover">hover</button>
+<button class="button active">active</button>
+<button class="button" disabled>active</button>
+
+<button class="button button--alert">alert</button>
+<button class="button button--alert focus">alert</button>
+<button class="button button--alert hover">alert</button>
+<button class="button button--alert active">alert</button>
+
+<button class="button button--warning">warning</button>
+<button class="button button--warning focus">warning</button>
+<button class="button button--warning hover">warning</button>
+<button class="button button--warning active">warning</button>
+
+| class    |    styling    |
+|----------|:-------------:|
+| button   |  generic             |
+
+```
+<button class="button">button</button>
+```
+
+
+*/
+
+/* colors assignment */
+
+$color__button 						: $color--light-blue;
+$color__button-text					: $color--white;
+
+$color__button-disabeld				: $color--light-gray;
+$color__button-disabeld-text		: darken($color__button-disabeld,15%);
+
+$color__button-alert 				: $color--dull-red;
+$color__button-alert-text			: $color--white;
+
+$color__button-warning 				: $color--dull-green;
+$color__button-warning-text			: $color--white;
+
+$button-box-shadow 					: 0px 0px 5px 2px;
+$button-focus 						: 15%;
+$button-hover 						: 15%;
+$button-active 						: 25%;
+
+
+$buttons : ('' $color__button $color__button-text)('--alert' $color__button-alert $color__button-alert-text)
+('--warning' $color__button-warning $color__button-warning-text);
+
+@each $item in $buttons {
+
+  $class 		: nth($item, 1);
+  $background 	: nth($item, 2);
+  $text 		: nth($item, 3);
+
+    .button#{$class} {
+		background-color 	: $background;
+		color 				: $text;
+		box-shadow 			: 0px 0px 0px 0px darken($background,$button-hover );
+    }
+
+    .button#{$class}.focus,
+    .button#{$class}:focus {
+        box-shadow : $button-box-shadow darken($background,$button-focus);
+    }
+
+    .button#{$class}.hover,
+    .button#{$class}:hover {
+        background-color: darken($background,$button-hover );
+    }
+
+    .button#{$class}.active,
+    .button#{$class}:active {
+        background-color: darken($background,$button-active );
+    }
+}
+
+.button {
+	border-width 		: 0px;
+	color 				: $color__button-text;
+	font-size        	: calculateRem(12);
+	line-height      	: calculateRem(14);
+	padding          	: calculateRem(6) calculateRem(12);
+	position			: relative;
+	transition 			: background-color .5s, box-shadow .1s;
+
+	@include border-radius(calculateRem(5));
+
+	&.focus,
+	&:focus {
+		border-width :0px;
+		outline : 0px;
+	}
+
+	&[disabled=disabled],
+	&:disabled {
+		background-color 	: $color__button-disabeld;
+		color 				: $color__button-disabeld-text;
+		pointer-events: none;
+	}
+}
+
+.button--alert {
+	color 				: $color__button-alert-text;
+}
