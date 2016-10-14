@@ -1,0 +1,313 @@
+/*doc
+---
+title: breakpoints
+name: breakpoints
+category: helpers
+
+---
+*/
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  //
+  //  Author: Rafal Bromirski
+  //  www: http://paranoida.com/
+  //  twitter: http://twitter.com/paranoida
+  //  dribbble: http://dribbble.com/paranoida
+  //
+  //  Licensed under a MIT License
+  //  @include min-screen(320px)  { ... }
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- screen ----------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+$emsInPx: 16;
+
+//Desktop max
+$desktop: 1200;
+$desktop-px: 1200px;
+$desktop-em: #{$desktop/$emsInPx}em;
+
+//Tablet max
+$tablet: 999;
+$tablet-px: 999px;
+$tablet-em: #{$tablet/$emsInPx}em;
+
+//Mobile max
+$mobile: 599;
+$mobile-px: 599px;
+$mobile-em: #{$mobile/$emsInPx}em;
+
+@mixin screen($resMin, $resMax)
+{
+  @media screen and (min-width: $resMin) and (max-width: $resMax)
+  {
+    @content;
+  }
+}
+
+// @include max-screen(resolution)
+@mixin max-screen($res)
+{
+  @media screen and (max-width: $res)
+  {
+    @content;
+  }
+}
+
+// @include min-screen(resolution)
+@mixin min-screen($res)
+{
+  @media screen and (min-width: $res)
+  {
+    @content;
+  }
+}
+
+// @include screen-height(min resolution,max resolution)
+@mixin screen-height($resMin, $resMax)
+{
+  @media screen and (min-height: $resMin) and (max-height: $resMax)
+  {
+    @content;
+  }
+}
+
+// @include max-screen-height(resolution)
+@mixin max-screen-height($res)
+{
+  @media screen and (max-height: $res)
+  {
+    @content;
+  }
+}
+
+// @include min-screen-height(resolution)
+@mixin min-screen-height($res)
+{
+  @media screen and (min-height: $res)
+  {
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- hdpi ------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+  // Based on bourbon hidpi-media-queries file (https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/css3/_hidpi-media-query.scss)
+  // HiDPI mixin. Default value set to 1.3 to target Google Nexus 7 (http://bjango.com/articles/min-device-pixel-ratio/)
+
+// @include hdpi(ratio [default 1.3])
+@mixin hdpi($ratio: 1.3)
+{
+  @media only screen and (-webkit-min-device-pixel-ratio: $ratio),
+  only screen and (min--moz-device-pixel-ratio: $ratio),
+  only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+  only screen and (min-resolution: #{round($ratio*96)}dpi),
+  only screen and (min-resolution: #{$ratio}dppx)
+  {
+    @content;
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- iphone ----------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include iphone3($orientation [default all])
+@mixin iphone3($orientation: all)
+{
+  $deviceMinWidth: 320px;
+  $deviceMaxWidth: 480px;
+  $devicePixelRatio: 1;
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- iphone-retina ---------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include iphone4($orientation [default all])
+@mixin iphone4($orientation: all)
+{
+  $deviceMinWidth: 320px;
+  $deviceMaxWidth: 480px;
+  $devicePixelRatio: 2;
+  $deviceAspectRatio: '2/3';
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (device-aspect-ratio: $deviceAspectRatio)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (device-aspect-ratio: 2/3) and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- iphone-5 --------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include iphone5($orientation [default all])
+@mixin iphone5($orientation: all)
+{
+  $deviceMinWidth: 320px;
+  $deviceMaxWidth: 568px;
+  $devicePixelRatio: 2;
+  $deviceAspectRatio: '40/71';
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (device-aspect-ratio: $deviceAspectRatio)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (device-aspect-ratio: $deviceAspectRatio) and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- iphone-6 --------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include iphone6($orientation [default all])
+@mixin iphone6($orientation: all)
+{
+  $deviceMinWidth: 375px;
+  $deviceMaxWidth: 667px;
+  $devicePixelRatio: 2;
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- iphone-6 Plus ---------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include iphone6-plus($orientation [default all])
+@mixin iphone6-plus($orientation: all)
+{
+  $deviceMinWidth: 414px;
+  $deviceMaxWidth: 736px;
+  $devicePixelRatio: 3;
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- ipads (all) -----------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include ipad($orientation [default all])
+@mixin ipad($orientation: all)
+{
+  $deviceMinWidth: 768px;
+  $deviceMaxWidth: 1024px;
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // --- ipad-retina -----------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+
+// @include ipad-retina($orientation [default all])
+@mixin ipad-retina($orientation: all)
+{
+  $deviceMinWidth: 768px;
+  $deviceMaxWidth: 1024px;
+  $devicePixelRatio: 2;
+
+  @if $orientation == all
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio)
+    {
+      @content;
+    }
+  }
+  @else
+  {
+    @media only screen and (min-device-width: $deviceMinWidth) and (max-device-width: $deviceMaxWidth)
+    and (-webkit-device-pixel-ratio: $devicePixelRatio) and (orientation: #{$orientation})
+    {
+      @content;
+    }
+  }
+}

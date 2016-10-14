@@ -1,0 +1,19 @@
+/*doc
+---
+title: hardware acceleration 
+name: hardware acceleration 
+category: helpers
+
+---
+
+*/
+
+@mixin ha {
+  @include vendor("transform",translate3d(0,0,0));
+}
+
+@mixin ha-noflickr {
+  @include vendor("backface-visibility",hidden);
+  @include vendor("-webkit-perspective",1000);
+}
+

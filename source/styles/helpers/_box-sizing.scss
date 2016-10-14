@@ -1,0 +1,12 @@
+/*doc
+---
+title: border-sizing
+name: border-sizing
+category: helpers
+
+---
+*/
+
+@mixin box-sizing($box-model) {
+  @include vendor("box-sizing",$box-model); 
+}

@@ -1,0 +1,10 @@
+@import '__inputs';
+
+.form {
+  border: 1px solid $color__blue;
+  max-width: $desktop-px;
+  margin-left:auto;
+  margin-right:auto;
+  @include border-radius();
+}
+

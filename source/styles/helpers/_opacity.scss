@@ -1,0 +1,14 @@
+/*doc
+---
+title: opacity
+name: opacity
+category: helpers
+
+--- 
+
+*/
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
